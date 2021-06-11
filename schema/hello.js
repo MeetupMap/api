@@ -1,4 +1,13 @@
-const helloResolve = {
+const gql = require('graphql-tag').gql;
+
+const Query = gql`
+    type Greeting {
+        greeting: String
+        kind: Int
+    }
+`;
+
+const Resolver = {
     Query: {
         hello: () => {
             return {
@@ -7,6 +16,10 @@ const helloResolve = {
             }
         }
     }
-}
+};
 
-module.exports = helloResolve;
+
+module.exports = {
+    query: Query,
+    resolver: Resolver
+};

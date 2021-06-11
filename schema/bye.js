@@ -1,7 +1,24 @@
-const byeResolve = {
-    Query: {
-        bye: () => 'bye!'
-    }
-}
+const gql = require('graphql-tag').gql;
 
-module.exports = byeResolve;
+const Query = gql`
+    type Goodbye {
+        goodbye: String
+        kind: Int
+    }
+`;
+
+const Resolver = {
+    Query: {
+        bye: () => {
+            return {
+                goodbye: "no",
+                kind: 5
+            }
+        }
+    }
+};
+
+module.exports = {
+    query: Query,
+    resolver: Resolver
+};
