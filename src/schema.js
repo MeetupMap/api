@@ -5,8 +5,13 @@ const gql = require('graphql-tag').gql;
 
 const Query = gql`
     type Query {
-        hello: String
+        hello: Greeting
         bye: String
+    }
+
+    type Greeting {
+        greeting: String
+        kind: Int
     }
 `;
 

@@ -1,6 +1,11 @@
 const helloResolve = {
     Query: {
-        hello: () => 'hello!'
+        hello: () => {
+            return {
+                greeting: "yes",
+                kind: 4
+            }
+        }
     }
 }
 
