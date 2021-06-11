@@ -1,8 +1,9 @@
 const tools = require('graphql-tools');
 const helloResolve = require('../schema/hello.js');
 const byeResolve = require('../schema/bye.js');
+const gql = require('graphql-tag').gql;
 
-const Query = `
+const Query = gql`
     type Query {
         hello: String
         bye: String
