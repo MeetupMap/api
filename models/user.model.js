@@ -8,7 +8,7 @@ const userSchema = new Schema({
     email: { type: String, required: true },
     scheduledMeetups: { type: Array, required: true },
     friends: { type: Array, required: true },
-    pendingFreinds: { type: Array, required: true },
+    pendingFriends: { type: Array, required: true },
     dateCreated: { type: Date, required: true },
 }, 
 {
