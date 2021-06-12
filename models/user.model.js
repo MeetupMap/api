@@ -9,7 +9,6 @@ const userSchema = new Schema({
     scheduledMeetups: { type: Array, required: true },
     friends: { type: Array, required: true },
     pendingFriends: { type: Array, required: true },
-    dateCreated: { type: Date, required: true },
 }, 
 {
     timestamps: true,

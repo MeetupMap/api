@@ -8,7 +8,6 @@ const meetupSchema = new Schema({
     meetupHoster: { type: String, required: true },
     coordinates: { type: Array, required: true },
     peopleAttending: { type: Array, required: true },
-    dateCreated: { type: Date, required: true },
 }, 
 {
     timestamps: true,

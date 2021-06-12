@@ -5,10 +5,9 @@ const Query = gql`
         _id: String
         name: String
         email: String
-        scheduledMeetups: GraphQLList 
-        friends: GraphQLList
-        pendingFriends: GraphQLList
-        dateCreated: Date
+        scheduledMeetups: [String] 
+        friends: [String]
+        pendingFriends: [String]
     }
 `;
 
@@ -21,8 +20,7 @@ const Resolver = {
                 email: "testemail@gmail.com",
                 scheduledMeetups: ["meetup1", "meetup2", "meetup3"],
                 friends: ["friend1", "friend2"," friend3"],
-                pendingFriends: ["pendingFriend1", "pendingFriend2"], 
-                dateCreated: Date()
+                pendingFriends: ["pendingFriend1", "pendingFriend2"]
             }
         }
     }
