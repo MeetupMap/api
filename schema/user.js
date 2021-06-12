@@ -9,7 +9,7 @@ const Query = gql`
 
 const Resolver = {
     Query: {
-        hello: (_, {text, kindnessNum}) => {
+        user: (_, {text, kindnessNum}) => {
             return {
                 greeting: text,
                 kind: kindnessNum

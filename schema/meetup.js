@@ -9,7 +9,7 @@ const Query = gql`
 
 const Resolver = {
     Query: {
-        bye: () => {
+        meetup: () => {
             return {
                 goodbye: "no",
                 kind: 5

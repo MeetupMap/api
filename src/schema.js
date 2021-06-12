@@ -1,18 +1,18 @@
 const tools = require('graphql-tools');
-const hello = require('../schema/hello.js');
-const bye = require('../schema/bye.js');
+const user = require('../schema/user.js');
+const meetup = require('../schema/meetup.js');
 const gql = require('graphql-tag').gql;
 
 const Query = gql`
     type Query {
-        hello(text: String!, kindnessNum: Int!): Greeting
-        bye: Goodbye
+        user(text: String!, kindnessNum: Int!): Greeting
+        meetup: Goodbye
     }
 `;
 
 const schema = tools.makeExecutableSchema({
-    typeDefs: [Query, hello.query, bye.query],
-    resolvers: [hello.resolver, bye.resolver],
+    typeDefs: [Query, user.query, meetup.query],
+    resolvers: [user.resolver, meetup.resolver],
 });
 
 module.exports = schema;
