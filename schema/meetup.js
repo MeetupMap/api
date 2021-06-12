@@ -2,17 +2,23 @@ const gql = require('graphql-tag').gql;
 
 const Query = gql`
     type Meetup {
-        goodbye: String
-        kind: Int
+        _id: String
+        name: String
+        meetupHoster: String
+        coordinates: [Float]
+        peopleAttending: [String]
     }
 `;
 
 const Resolver = {
     Query: {
-        meetup: () => {
+        meetup: (_, {meetupID}) => {
             return {
-                goodbye: "no",
-                kind: 5
+                _id: meetupID,
+                name: "test Meetup",
+                meetupHoster: "testHoster",
+                coordinates: [-179.3213, 273.2342],
+                peopleAttending: ["testAttendee1", "testAttendee2", "testAttendee3"]
             }
         }
     }

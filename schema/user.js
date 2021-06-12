@@ -1,5 +1,5 @@
 const gql = require('graphql-tag').gql;
-const GraphQLList = require('graphql').GraphQLList;
+
 const Query = gql`
     type User {
         _id: String
