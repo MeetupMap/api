@@ -18,7 +18,6 @@ const Resolver = {
     }
 };
 
-
 module.exports = {
     query: Query,
     resolver: Resolver
