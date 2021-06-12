@@ -1,6 +1,6 @@
 const gql = require('graphql-tag').gql;
 
-const Query = gql`
+const typeDefs = gql`
     type User {
         _id: String
         name: String
@@ -9,6 +9,8 @@ const Query = gql`
         friends: [String]
         pendingFriends: [String]
     }
+    
+    
 `;
 
 const Resolver = {
@@ -22,11 +24,24 @@ const Resolver = {
                 friends: ["friend1", "friend2"," friend3"],
                 pendingFriends: ["pendingFriend1", "pendingFriend2"]
             }
+        },
+    },
+
+    Mutation: {
+        createUser: (_, {userID, name, email}) => {
+            return {
+                _id: userID,
+                name: name,
+                email: email,
+                scheduledMeetups: ["meetup1", "meetup2", "meetup3"],
+                friends: ["friend1", "friend2"," friend3"],
+                pendingFriends: ["pendingFriend1", "pendingFriend2"]
+            }
         }
     }
 };
 
 module.exports = {
-    query: Query,
+    typedefs: typeDefs,
     resolver: Resolver
 };

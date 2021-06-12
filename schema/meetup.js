@@ -1,6 +1,6 @@
 const gql = require('graphql-tag').gql;
 
-const Query = gql`
+const typeDefs = gql`
     type Meetup {
         _id: String
         name: String
@@ -25,6 +25,6 @@ const Resolver = {
 };
 
 module.exports = {
-    query: Query,
+    typedefs: typeDefs,
     resolver: Resolver
 };
