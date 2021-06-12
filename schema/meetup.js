@@ -1,7 +1,7 @@
 const gql = require('graphql-tag').gql;
 
 const Query = gql`
-    type Goodbye {
+    type Meetup {
         goodbye: String
         kind: Int
     }

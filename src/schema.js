@@ -5,8 +5,8 @@ const gql = require('graphql-tag').gql;
 
 const Query = gql`
     type Query {
-        user(text: String!, kindnessNum: Int!): Greeting
-        meetup: Goodbye
+        user(userID: String!): User
+        meetup: Meetup
     }
 `;
 

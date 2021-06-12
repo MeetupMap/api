@@ -1,18 +1,28 @@
 const gql = require('graphql-tag').gql;
-
+const GraphQLList = require('graphql').GraphQLList;
 const Query = gql`
-    type Greeting {
-        greeting: String
-        kind: Int
+    type User {
+        _id: String
+        name: String
+        email: String
+        scheduledMeetups: GraphQLList 
+        friends: GraphQLList
+        pendingFriends: GraphQLList
+        dateCreated: Date
     }
 `;
 
 const Resolver = {
     Query: {
-        user: (_, {text, kindnessNum}) => {
+        user: (_, {userID}) => {
             return {
-                greeting: text,
-                kind: kindnessNum
+                _id: userID,
+                name: "testName",
+                email: "testemail@gmail.com",
+                scheduledMeetups: ["meetup1", "meetup2", "meetup3"],
+                friends: ["friend1", "friend2"," friend3"],
+                pendingFriends: ["pendingFriend1", "pendingFriend2"], 
+                dateCreated: Date()
             }
         }
     }
