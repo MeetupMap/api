@@ -28,6 +28,19 @@ const Resolver = {
 
     Mutation: {
         createUser: (_, {userID, name, email}) => {
+            const newUser = new UserDB({
+                _id: userID,
+                name: name,
+                email: email,
+                scheduledMeetup: [],
+                friends: [],
+                pendingFriends: []
+            });
+
+            newUser.save()
+                .then(() => console.log("created new user"))
+                .catch(err => console.log("error: " + err));
+            
             return {
                 _id: userID,
                 name: name,
