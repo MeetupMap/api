@@ -1,5 +1,7 @@
 const gql = require('graphql-tag').gql;
 let meetupDB = require('../models/meetup.model');
+let userDB = require('../models/user.model');
+
 
 const typeDefs = gql`
     type Meetup {
@@ -36,6 +38,17 @@ const Resolver = {
 
             newMeetup.save()
                 .then(() => console.log("created new meetup in database"))
+                .catch(err => console.log("error: " + err));
+            
+            userDB.findById(newMeetup.meetupHoster)
+                .then(user => {
+                    let tempMeetup = user.scheduledMeetups;
+                    tempMeetup.push(newMeetup._id);
+                    user.scheduledMeetups = tempMeetup;
+                    user.save()
+                        .then(() => console.log("added meetup to user"))
+                        .catch(err => console.log("error: " + err));
+                })
                 .catch(err => console.log("error: " + err));
 
             return {
