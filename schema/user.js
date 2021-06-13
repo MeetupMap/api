@@ -15,10 +15,10 @@ const typeDefs = gql`
 const Resolver = {
     Query: {
         user: (_, {userID}) => {
-            const test = userDB.findById(userID)
+            const queriedUser = userDB.findById(userID)
                 .then(user => { return user })
                 .catch(err => console.log("error: " + err));
-            return test;
+            return queriedUser;
         },
     },
 

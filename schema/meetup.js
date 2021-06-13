@@ -16,18 +16,17 @@ const typeDefs = gql`
 const Resolver = {
     Query: {
         meetup: (_, {meetupID}) => {
-            return {
-                _id: meetupID,
-                name: "test Meetup",
-                meetupHoster: "testHoster",
-                coordinates: [-179.3213, 273.2342],
-                peopleAttending: ["testAttendee1", "testAttendee2", "testAttendee3"]
-            }
+            const queriedMeetup = meetupDB.findById(meetupID)
+                .then(meetup => { return meetup })
+                .catch(err => console.log("error: " + err));
+            return queriedMeetup;
         }
     },
 
+
     Mutation: {
         createMeetup: (_, {meetupID, name,  meetupHoster, coordinates}) => {
+            // saving meetup to meetup collection
             const newMeetup = new meetupDB({
                 _id: meetupID,
                 name: name,
@@ -40,6 +39,7 @@ const Resolver = {
                 .then(() => console.log("created new meetup in database"))
                 .catch(err => console.log("error: " + err));
             
+            // saving meetup to user's list of hosted meetups
             userDB.findById(newMeetup.meetupHoster)
                 .then(user => {
                     let tempMeetup = user.scheduledMeetups;
