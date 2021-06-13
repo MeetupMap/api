@@ -6,6 +6,7 @@ const gql = require('graphql-tag').gql;
 const Query = gql`
     type Mutation {
         createUser(userID: String!, name: String!, email: String!): User 
+        createMeetup(meetupID: String!, name: String!, meetupHoster: String!, coordinates: [Float]!): Meetup
     }
 
     type Query {

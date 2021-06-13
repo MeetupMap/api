@@ -21,7 +21,20 @@ const Resolver = {
                 peopleAttending: ["testAttendee1", "testAttendee2", "testAttendee3"]
             }
         }
+    },
+
+    Mutation: {
+        createMeetup: (_, {meetupID, name,  meetupHoster, coordinates}) => {
+            return {
+                _id: meetupID,
+                name: name,
+                meetupHoster: meetupHoster,
+                coordinates: coordinates,
+                peopleAttending: ["testAttendee1", "testAttendee2", "testAttendee3"]
+            }
+        }
     }
+    
 };
 
 module.exports = {

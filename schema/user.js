@@ -9,8 +9,6 @@ const typeDefs = gql`
         friends: [String]
         pendingFriends: [String]
     }
-    
-    
 `;
 
 const Resolver = {
