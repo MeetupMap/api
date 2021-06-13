@@ -1,4 +1,5 @@
 const gql = require('graphql-tag').gql;
+let meetupDB = require('../models/meetup.model');
 
 const typeDefs = gql`
     type Meetup {
@@ -25,6 +26,18 @@ const Resolver = {
 
     Mutation: {
         createMeetup: (_, {meetupID, name,  meetupHoster, coordinates}) => {
+            const newMeetup = new meetupDB({
+                _id: meetupID,
+                name: name,
+                meetupHoster: meetupHoster,
+                coordinates: coordinates,
+                peopleAttending: ["testAttendee1", "testAttendee2", "testAttendee3"]
+            })
+
+            newMeetup.save()
+                .then(() => console.log("created new meetup in database"))
+                .catch(err => console.log("error: " + err));
+
             return {
                 _id: meetupID,
                 name: name,

@@ -1,4 +1,5 @@
 const gql = require('graphql-tag').gql;
+let UserDB = require('../models/user.model');
 
 const typeDefs = gql`
     type User {
