@@ -1,5 +1,5 @@
 const gql = require('graphql-tag').gql;
-let UserDB = require('../models/user.model');
+let userDB = require('../models/user.model');
 
 const typeDefs = gql`
     type User {
@@ -15,14 +15,10 @@ const typeDefs = gql`
 const Resolver = {
     Query: {
         user: (_, {userID}) => {
-            return {
-                _id: userID,
-                name: "testName",
-                email: "testemail@gmail.com",
-                scheduledMeetups: ["meetup1", "meetup2", "meetup3"],
-                friends: ["friend1", "friend2"," friend3"],
-                pendingFriends: ["pendingFriend1", "pendingFriend2"]
-            }
+            const test = userDB.findById(userID)
+                .then(user => { return user })
+                .catch(err => console.log("error: " + err));
+            return test;
         },
     },
 
