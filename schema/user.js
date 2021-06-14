@@ -10,6 +10,8 @@ const typeDefs = gql`
         friends: [String]
         pendingFriends: [String]
     }
+
+    
 `;
 
 const Resolver = {
@@ -44,7 +46,28 @@ const Resolver = {
                 scheduledMeetups: ["meetup1", "meetup2", "meetup3"],
                 friends: ["friend1", "friend2"," friend3"],
                 pendingFriends: ["pendingFriend1", "pendingFriend2"]
-            }
+            };
+        },
+
+        addFriend: (_, {requester, receiver}) => {
+            let successMessage = userDB.findById(receiver)
+            .then(user => {
+                let tempFriends = user.pendingFriends;
+                tempFriends.push(requester);
+                user.pendingFriends = tempFriends;
+                user.save()
+                    .then(() => console.log("sent friend request!"))
+                    .catch(err => console.log("error: " + err));
+                return "success"
+            })
+            .catch(err => {
+                console.log("error: " + err)
+                return "error"
+            });
+            
+            return {
+                message: successMessage
+            };
         }
     }
 };
