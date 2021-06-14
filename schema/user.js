@@ -53,12 +53,17 @@ const Resolver = {
             let successMessage = userDB.findById(receiver)
             .then(user => {
                 let tempFriends = user.pendingFriends;
-                tempFriends.push(requester);
-                user.pendingFriends = tempFriends;
-                user.save()
-                    .then(() => console.log("sent friend request!"))
-                    .catch(err => console.log("error: " + err));
-                return "success"
+                if(tempFriends.includes(requester)) {
+                    return "duplicate_error"
+                }
+                else {
+                    tempFriends.push(requester);
+                    user.pendingFriends = tempFriends;
+                    user.save()
+                        .then(() => console.log("sent friend request!"))
+                        .catch(err => console.log("error: " + err));
+                    return "success"
+                }
             })
             .catch(err => {
                 console.log("error: " + err)
