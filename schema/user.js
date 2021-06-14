@@ -24,7 +24,7 @@ const Resolver = {
 
     Mutation: {
         createUser: (_, {userID, name, email}) => {
-            const newUser = new UserDB({
+            const newUser = new userDB({
                 _id: userID,
                 name: name,
                 email: email,
