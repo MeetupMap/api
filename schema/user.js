@@ -95,6 +95,27 @@ const Resolver = {
             return {
                 message: successMessage
             };
+        },
+
+        removeFriend: (_, {requester, target}) => {
+            let successMessage = userDB.findById(requester)
+                .then(user => {
+                    let tempFriends = user.friends;
+                    const index = tempFriends.indexOf(target);
+                    tempFriends.splice(index, 1);
+                    user.save()
+                        .then(() => console.log("removed friend!"))
+                        .catch(err => console.log("error: " + err));
+                    return "success";
+                })
+                .catch(err => {
+                    console.log("error: " + err)
+                    return "error";
+                });
+
+            return {
+                message: successMessage
+            };
         }
     }
 };
