@@ -9,6 +9,7 @@ const Query = gql`
         createMeetup(meetupID: String!, name: String!, meetupHoster: String!, coordinates: [Float]!): Meetup
         addFriend(requester: String!, receiver: String!): Success
         acceptFriend(requester: String!, receiver: String!): Success
+        removeFriend(requester: String!, target: String!) : Success # requester: person requesting to remove, target: person being removed 
     }
 
     type Query {
