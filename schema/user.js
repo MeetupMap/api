@@ -54,7 +54,7 @@ const Resolver = {
             .then(user => {
                 let tempFriends = user.pendingFriends;
                 if(tempFriends.includes(requester)) {
-                    return "duplicate_error"
+                    return "duplicate_error";
                 }
                 else {
                     tempFriends.push(requester);
@@ -62,14 +62,36 @@ const Resolver = {
                     user.save()
                         .then(() => console.log("sent friend request!"))
                         .catch(err => console.log("error: " + err));
-                    return "success"
+                    return "success";
                 }
             })
             .catch(err => {
-                console.log("error: " + err)
-                return "error"
+                console.log("error: " + err);
+                return "error";
             });
             
+            return {
+                message: successMessage
+            };
+        },
+
+        acceptFriend: (_, {requester, receiver}) => {
+            let successMessage = userDB.findById(receiver)
+                .then(user => {
+                    let tempFriendRequests = user.pendingFriends;
+                    let tempFriends = user.friends;
+                    const index = tempFriendRequests.indexOf(requester);
+                    tempFriendRequests.splice(index, 1);
+                    tempFriends.push(requester);
+                    user.save()
+                        .then(() => console.log("accepted friend request!"))
+                        .catch(err => console.log("error: " + err));
+                    return "success";
+                })
+                .catch(err => {
+                    console.log("error: " + err);
+                    return "error";
+                })
             return {
                 message: successMessage
             };
