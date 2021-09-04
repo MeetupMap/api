@@ -13,5 +13,8 @@
         "graphql-tag": "^2.12.4",
         "graphql-tools": "^7.0.5",
         "mongoose": "^5.12.13"
+    },
+    "devDependencies": {
+        "prisma": "^2.30.3"
     }
 }

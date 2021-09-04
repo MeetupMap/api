@@ -1,6 +1,6 @@
 const tools = require('graphql-tools');
-const user = require('../schema/user.js');
-const meetup = require('../schema/meetup.js');
+const user = require('../schemas/user.js');
+const meetup = require('../schemas/meetup.js');
 const gql = require('graphql-tag').gql;
 
 const Query = gql`

@@ -20,10 +20,5 @@ app.use(
 const uri = secrets.atlas_uri;
 const port = process.env.PORT || 4000;
 
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("connected to mongoDB database successfully");
-});
-
 app.listen(port, () => {console.log(`started server on port ${port}`)});
+
