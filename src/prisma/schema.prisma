@@ -6,3 +6,25 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model User {
+  id      String  @id @default(cuid())
+  name    String 
+  email   String  @unique
+  meetups Meetup[]  // meetups the user has scheduled
+  groups  Group[]  // meetup groups a user is in 
+}
+
+model Group {
+  id      String  @id
+  name    String 
+  users   User[]
+  meetups Meetup[]  // users in the group
+}
+
+model Meetup {
+  id      String  @id
+  name    String
+  users   User[]
+  groups  Group[]
+}

@@ -6,6 +6,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@prisma/client": "^2.30.3",
         "cors": "^2.8.5",
         "express": "^4.17.1",
         "express-graphql": "^0.12.0",
