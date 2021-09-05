@@ -1,18 +1,21 @@
 const tools = require('graphql-tools');
-const user = require('../schemas/user');
-const meetup = require('../schemas/meetup');
 const gql = require('graphql-tag').gql;
 
-const typeDefs = gql`
+const user = require('../schemas/user');
+const meetup = require('../schemas/meetup');
+const group = require('../schemas/group');
 
+const typeDefs = gql`
     type Mutation {
         createUser(userID: String!, name: String!, email: String!): User 
         createMeetup(meetupID: String!, name: String!, coordinates: [Float]!): Meetup
+        createGroup(groupID: String!, name: String!): Group
     }
 
     type Query {
         user(userID: String!): User
         meetup(meetupID: String!): Meetup
+        group(groupID: String!): Group
     }
 
     type User {
@@ -20,7 +23,7 @@ const typeDefs = gql`
         name: String
         email: String
         meetups: [Meetup] 
-        groups: [String]
+        groups: [Group]
     }
 
     type Meetup {
@@ -28,13 +31,20 @@ const typeDefs = gql`
         name: String
         coordinates: [Float]
         users: [User]
-        groups: [String]
+        groups: [Group]
+    }
+
+    type Group {
+        id: String
+        name: String
+        users: [User]
+        meetups: [Meetup]
     }
 `;
 
 const schema = tools.makeExecutableSchema({
     typeDefs: [typeDefs],
-    resolvers: [user.resolver, meetup.resolver],
+    resolvers: [user.resolver, meetup.resolver, group.resolver],
 });
 
 module.exports = schema;

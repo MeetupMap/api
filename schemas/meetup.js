@@ -1,7 +1,5 @@
-const gql = require('graphql-tag').gql;
 const { PrismaClient } = require('@prisma/client')
 
-const User = require('./user.js');
 
 let meetupDB = require('../models/meetup.model');
 let userDB = require('../models/user.model');

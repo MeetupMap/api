@@ -3,29 +3,28 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 const Resolver = {
     Query: {
-        user: (_, {userID}) => {
-            return prisma.user.findUnique({
+        group: (_, {groupID}) => {
+            return prisma.group.findUnique({
                 where: {
-                    id: userID
+                    id: groupID
                 }
             })
         },
     },
 
     Mutation: {
-        createUser: (_, {userID, name, email}) => {
-            console.log("Created new user!");
-            return prisma.user.create({
+        createGroup: (_, {groupID, name}) => {
+            console.log("Created new group!");
+            return prisma.group.create({
                 data: {
-                    id: userID,
+                    id: groupID,
                     name: name,
-                    email: email
                 }
             })
-        },
+        },    
     }
-};
+}
 
 module.exports = {
     resolver: Resolver
-};
+}
