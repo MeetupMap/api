@@ -23,8 +23,9 @@ model Group {
 }
 
 model Meetup {
-  id      String  @id
-  name    String
-  users   User[]
-  groups  Group[]
+  id          String  @id
+  name        String
+  coordinates Float[]
+  users       User[] 
+  groups      Group[]
 }

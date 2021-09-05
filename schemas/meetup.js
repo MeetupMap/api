@@ -1,28 +1,24 @@
 const gql = require('graphql-tag').gql;
+const { PrismaClient } = require('@prisma/client')
+
+const User = require('./user.js');
+
 let meetupDB = require('../models/meetup.model');
 let userDB = require('../models/user.model');
 
+const prisma = new PrismaClient();
 
-const typeDefs = gql`
-    type Meetup {
-        _id: String
-        name: String
-        meetupHoster: String
-        coordinates: [Float]
-        peopleAttending: [String]
-    }
-`;
 
 const Resolver = {
     Query: {
         meetup: (_, {meetupID}) => {
-            const queriedMeetup = meetupDB.findById(meetupID)
-                .then(meetup => { return meetup })
-                .catch(err => console.log("error: " + err));
-            return queriedMeetup;
+            return prisma.meetup.findUnique({
+                where: {
+                    id: meetupID
+                }
+            })
         }
     },
-
 
     Mutation: {
         createMeetup: (_, {meetupID, name,  meetupHoster, coordinates}) => {
@@ -64,6 +60,5 @@ const Resolver = {
 };
 
 module.exports = {
-    typedefs: typeDefs,
     resolver: Resolver
 };
