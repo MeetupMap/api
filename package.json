@@ -5,6 +5,9 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
+    "scripts": {
+        "dev": "node .\\src\\index.js"
+    },
     "dependencies": {
         "@prisma/client": "^2.30.3",
         "cors": "^2.8.5",

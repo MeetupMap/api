@@ -1,12 +1,11 @@
 const cors = require('cors');
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
-const { PrismaClient } = require('@prisma/client')
+
 const schema = require('./schema.js');
 
 
 const app = express();
-const prisma = new PrismaClient() 
 
 app.use(cors());
 app.use(

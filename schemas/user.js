@@ -19,7 +19,24 @@ const Resolver = {
                 data: {
                     id: userID,
                     name: name,
-                    email: email
+                    email: email,
+                    groups: {
+                        create: [
+                            {
+                                id: "g2",
+                                name: "g2",
+                                meetups: {
+                                    create: [
+                                        {
+                                            id: "m2",
+                                            name: "m2",
+                                            coordinates: [0.2, 0.2]
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
                 }
             })
         },

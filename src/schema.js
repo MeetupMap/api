@@ -9,13 +9,18 @@ const typeDefs = gql`
     type Mutation {
         createUser(userID: String!, name: String!, email: String!): User 
         createMeetup(meetupID: String!, name: String!, coordinates: [Float]!): Meetup
-        createGroup(groupID: String!, name: String!): Group
+        createGroup(groupID: String!, name: String!, userID: String!): Group
     }
 
     type Query {
         user(userID: String!): User
         meetup(meetupID: String!): Meetup
         group(groupID: String!): Group
+    }
+
+    input GroupInput {
+        id: String 
+        name: String
     }
 
     type User {
