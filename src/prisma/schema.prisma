@@ -8,26 +8,31 @@ generator client {
 }
 
 model User {
-  id      String    @id @default(cuid())
-  name    String
-  email   String    @unique
-  meetups Meetup[]  @relation(references: [id])
-  groups  Group[]   @relation(references: [id])
+  id            String      @id @default(cuid())
+  name          String
+  email         String      @unique 
+  groups        Group[]
 }
 
 model Group {
-  id      String    @id
-  name    String
-  users   User[]    @relation(references: [id])
-  meetups Meetup[] 
+  id        String      @id
+  name      String
+  Meetups   GroupOnMeetup[] 
+  Users     User[]
 }
 
 model Meetup {
-  id          String  @id
-  name        String
-  coordinates Float[]
-  users       User[]  @relation(references: [id])
+  id            String  @id
+  name          String
+  coordinates   Float[]
+  Groups        GroupOnMeetup[]
+}
 
-  Group       Group?  @relation(fields: [groupId], references: [id])
-  groupId     String?
+model GroupOnMeetup {
+  Group     Group     @relation(fields: [GroupId], references:[id])
+  GroupId   String    
+  Meetup    Meetup    @relation(fields: [MeetupId], references:[id])
+  MeetupId  String
+  
+  @@id([GroupId, MeetupId])
 }
