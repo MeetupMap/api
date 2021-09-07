@@ -40,13 +40,15 @@ const Resolver = {
 
             await prisma.group.update({
                 where: { id: groupID },
+                include: { Users: true },
                 data: {
-                    users: userList
+                    Users: {
+                        connect: {
+                            id: userID
+                        }
+                    }
                 }
-            })
-            group = await prisma.group.findUnique({ where: { id: groupID }, include: { Users: true } })
-
-            console.log(group)
+            });
             
             // Update list of groups for user
             
@@ -57,7 +59,9 @@ const Resolver = {
                 where: { id: userID },
                 data: {
                     groups: {
-                        set: groupList
+                        connect: {
+                            id: groupID
+                        }
                     }
                 }
             })
