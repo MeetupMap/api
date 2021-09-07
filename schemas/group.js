@@ -13,12 +13,6 @@ const Resolver = {
     Mutation: {
         createGroup: async (_, {groupID, name, userID}) => {
 
-            // Find creator of new group
-            const user = await prisma.user.findUnique({
-                where: { id: userID },
-                include: { groups: true }
-            });
-
             // Create group
             await prisma.group.create({
                 data: {
@@ -34,10 +28,6 @@ const Resolver = {
             });
 
             // Update group with creator of group
-
-            let userList = group.Users;
-            userList.push(user);
-
             await prisma.group.update({
                 where: { id: groupID },
                 include: { Users: true },
@@ -50,11 +40,7 @@ const Resolver = {
                 }
             });
             
-            // Update list of groups for user
-            
-            let groupList = user.groups;
-            groupList.push(group);
-            
+            // Update list of groups for user            
             await prisma.user.update({
                 where: { id: userID },
                 data: {
