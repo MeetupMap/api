@@ -10,7 +10,7 @@ const typeDefs = gql`
         createUser(userID: String!, name: String!, email: String!): User 
         createMeetup(meetupID: String!, name: String!, coordinates: [Float]!): Meetup
         createGroup(groupID: String!, name: String!, userID: String!): Group
-
+        addUserToGroup(userID: String!, groupID: String!): Group
     }
 
     type Query {
@@ -37,7 +37,7 @@ const typeDefs = gql`
     type Group {
         id: String
         name: String
-        Users: [User]
+        users: [User]
         meetups: [GroupOnMeetup]
     }
 

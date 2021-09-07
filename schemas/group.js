@@ -18,21 +18,22 @@ const Resolver = {
                 data: {
                     id: groupID,
                     name: name
-                }
+                },
+                include: {users: true, meetups: true }
             });
 
             // Grab the list of users from the new group to update
             const group = await prisma.group.findUnique({
                 where: { id: groupID },
-                include: { Users: true }
+                include: { users: true }
             });
 
             // Update group with creator of group
             await prisma.group.update({
                 where: { id: groupID },
-                include: { Users: true },
+                include: { users: true },
                 data: {
-                    Users: {
+                    users: {
                         connect: {
                             id: userID
                         }
@@ -54,6 +55,8 @@ const Resolver = {
 
             return group
         },    
+
+
     }
 }
 

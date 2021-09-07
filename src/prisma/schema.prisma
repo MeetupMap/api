@@ -12,27 +12,21 @@ model User {
   name          String
   email         String      @unique 
   groups        Group[]
+  meetups       Meetup[]
 }
 
 model Group {
   id        String      @id
   name      String
-  Meetups   GroupOnMeetup[] 
-  Users     User[]
+  meetups   Meetup[] 
+  users     User[]
 }
 
 model Meetup {
   id            String  @id
   name          String
   coordinates   Float[]
-  Groups        GroupOnMeetup[]
+  groups        Group[]
+  users         User[]
 }
 
-model GroupOnMeetup {
-  Group     Group     @relation(fields: [GroupId], references:[id])
-  GroupId   String    
-  Meetup    Meetup    @relation(fields: [MeetupId], references:[id])
-  MeetupId  String
-  
-  @@id([GroupId, MeetupId])
-}
