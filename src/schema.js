@@ -11,6 +11,7 @@ const typeDefs = gql`
         createMeetup(meetupID: String!, name: String!, coordinates: [Float]!): Meetup
         createGroup(groupID: String!, name: String!, userID: String!): Group
         addUserToGroup(userID: String!, groupID: String!): Group
+        removeUserFromGroup(userID: String!, groupID: String!): Group
     }
 
     type Query {
@@ -24,6 +25,7 @@ const typeDefs = gql`
         name: String
         email: String
         groups: [Group]
+        meetups: [Meetup]
     }
 
     type Meetup {
@@ -31,22 +33,16 @@ const typeDefs = gql`
         name: String
         coordinates: [Float]
         users: [User]
-        groups: [GroupOnMeetup]
+        groups: [Meetup]
     }
 
     type Group {
         id: String
         name: String
         users: [User]
-        meetups: [GroupOnMeetup]
+        meetups: [Meetup]
     }
 
-    type GroupOnMeetup {
-        Group: Group
-        GroupId: String
-        Meetup: Meetup 
-        MeetupId: String
-    }
 `;
 
 const schema = tools.makeExecutableSchema({

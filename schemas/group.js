@@ -12,7 +12,6 @@ const Resolver = {
 
     Mutation: {
         createGroup: async (_, {groupID, name, userID}) => {
-
             // Create group
             await prisma.group.create({
                 data: {
@@ -31,7 +30,6 @@ const Resolver = {
             // Update group with creator of group
             await prisma.group.update({
                 where: { id: groupID },
-                include: { users: true },
                 data: {
                     users: {
                         connect: {
@@ -58,7 +56,6 @@ const Resolver = {
         addUserToGroup: async(_, {groupID, userID}) => {
             const group = await prisma.group.update({
                 where: { id: groupID },
-                include: { users: true },
                 data: {
                     users: {
                         connect: {
@@ -70,7 +67,6 @@ const Resolver = {
 
             await prisma.user.update({
                 where: { id: userID },
-                include: { groups: true },
                 data: {
                     groups: {
                         connect: {
@@ -81,7 +77,33 @@ const Resolver = {
             });
 
             return group;
-        }
+        },
+        removeUserFromGroup: async(_, {groupID, userID}) => {
+            const group = await prisma.group.update({
+                where: { id: groupID },
+                data: {
+                    users: {
+                        disconnect: {
+                            id: userID
+                        }
+                    }
+                }
+            });
+
+            await prisma.user.update({
+                where: { id: userID },
+                data: {
+                    groups: {
+                        disconnect: {
+                            id: groupID
+                        }
+                    }
+                }
+
+            });
+
+            return group;
+        },
 
     }
 }
