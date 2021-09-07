@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 const Resolver = {
@@ -22,7 +22,7 @@ const Resolver = {
                     name: name,
                     email: email
                 }
-            })
+            });
         },
 
     }

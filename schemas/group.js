@@ -1,4 +1,4 @@
-const { PrismaClient, Prisma } = require('@prisma/client')
+const { PrismaClient, Prisma } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 const Resolver = {
@@ -6,7 +6,7 @@ const Resolver = {
         group: (_, {groupID}) => {
             return prisma.group.findUnique({
                 where: { id: groupID }
-            })
+            });
         },
     },
 
@@ -51,11 +51,37 @@ const Resolver = {
                         }
                     }
                 }
-            })
+            });
 
-            return group
+            return group;
         },    
+        addUserToGroup: async(_, {groupID, userID}) => {
+            const group = await prisma.group.update({
+                where: { id: groupID },
+                include: { users: true },
+                data: {
+                    users: {
+                        connect: {
+                            id: userID
+                        }
+                    }
+                }
+            });
 
+            await prisma.user.update({
+                where: { id: userID },
+                include: { groups: true },
+                data: {
+                    groups: {
+                        connect: {
+                            id: groupID
+                        }
+                    }
+                }
+            });
+
+            return group;
+        }
 
     }
 }
