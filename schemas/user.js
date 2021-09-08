@@ -5,7 +5,8 @@ const Resolver = {
     Query: {
         user: async (_, {userID}) => {
             const user = await prisma.user.findUnique({
-                where: { id: userID }
+                where: { id: userID },
+                include: { groups: true }
             })
             return user;
         },
