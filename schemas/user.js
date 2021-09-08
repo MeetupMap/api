@@ -6,7 +6,13 @@ const Resolver = {
         user: async (_, {userID}) => {
             const user = await prisma.user.findUnique({
                 where: { id: userID },
-                include: { groups: true }
+                include: {
+                    groups: {
+                        include: {
+                            meetups: true
+                        }
+                    }
+                }
             })
             return user;
         },

@@ -6,14 +6,13 @@ const Resolver = {
         group: (_, {groupID}) => {
             return prisma.group.findUnique({
                 where: { id: groupID },
-                include: { meetups: true }
+                include: { users: true, meetups: true }
             });
         },
     },
 
     Mutation: {
         createGroup: async (_, {groupID, name, userID}) => {
-            // Create group
             return prisma.group.create({
                 data: {
                     id: groupID,
