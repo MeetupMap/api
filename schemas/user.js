@@ -22,6 +22,11 @@ const Resolver = {
                 }
             });
         },
+        deleteUser: async(_, {userID}) => {
+            return prisma.user.delete({
+                where: { id: userID }
+            });
+        }
 
     }
 };

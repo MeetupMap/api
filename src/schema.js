@@ -7,7 +7,8 @@ const group = require('../schemas/group');
 
 const typeDefs = gql`
     type Mutation {
-        createUser(userID: String!, name: String!, email: String!): User 
+        createUser(userID: String!, name: String!, email: String!): User
+        deleteUser(userID: String!): User 
         createMeetup(meetupID: String!, name: String!, coordinates: [Float]!): Meetup
         createGroup(groupID: String!, name: String!, userID: String!): Group
         addUserToGroup(userID: String!, groupID: String!): Group
