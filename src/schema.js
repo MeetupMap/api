@@ -9,7 +9,7 @@ const typeDefs = gql`
     type Mutation {
         createUser(userID: String!, name: String!, email: String!): User
         deleteUser(userID: String!): User 
-        createMeetup(meetupID: String!, name: String!, coordinates: [Float]!): Meetup
+        createMeetup(meetupID: String!, name: String!, coordinates: [Float]!, groupID: String!): Meetup
         createGroup(groupID: String!, name: String!, userID: String!): Group
         addUserToGroup(userID: String!, groupID: String!): Group
         removeUserFromGroup(userID: String!, groupID: String!): Group
@@ -27,14 +27,12 @@ const typeDefs = gql`
         name: String
         email: String
         groups: [Group]
-        meetups: [Meetup]
     }
 
     type Meetup {
         id: String
         name: String
         coordinates: [Float]
-        users: [User]
         groups: [Meetup]
     }
 
