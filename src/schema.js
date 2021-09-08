@@ -13,6 +13,7 @@ const typeDefs = gql`
         createGroup(groupID: String!, name: String!, userID: String!): Group
         addUserToGroup(userID: String!, groupID: String!): Group
         removeUserFromGroup(userID: String!, groupID: String!): Group
+        deleteGroup(groupID: String!): Group
     }
 
     type Query {

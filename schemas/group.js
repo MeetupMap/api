@@ -104,6 +104,11 @@ const Resolver = {
 
             return group;
         },
+        deleteGroup: async(_, {groupID}) => {
+            return prisma.group.delete({
+                where: { id: groupID }
+            });
+        },
         
 
     }
