@@ -31,6 +31,11 @@ const Resolver = {
                     }
                 }
             });
+        },
+        deleteMeetup: async(_, {meetupID}) => {
+            return prisma.meetup.delete({
+                where: { id: meetupID }    
+            });
         }
     }
     

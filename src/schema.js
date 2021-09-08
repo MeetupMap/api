@@ -10,6 +10,7 @@ const typeDefs = gql`
         createUser(userID: String!, name: String!, email: String!): User
         deleteUser(userID: String!): User 
         createMeetup(meetupID: String!, name: String!, coordinates: [Float]!, groupID: String!): Meetup
+        deleteMeetup(meetupID: String!): Meetup
         createGroup(groupID: String!, name: String!, userID: String!): Group
         addUserToGroup(userID: String!, groupID: String!): Group
         removeUserFromGroup(userID: String!, groupID: String!): Group
