@@ -33,7 +33,7 @@ const typeDefs = gql`
         id: String
         name: String
         coordinates: [Float]
-        groups: [Meetup]
+        groups: [Group]
     }
 
     type Group {

@@ -1,16 +1,20 @@
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient();
-
-
 const Resolver = {
     Query: {
-        meetup: (_, {meetupID}) => {
+        meetup: async (_, {meetupID}) => {
             return prisma.meetup.findUnique({
                 where: { id: meetupID },
-                include: { groups: true }
-            })
-        }
+                include: {
+                    groups: {
+                        include: {
+                            users: true
+                        }
+                    }
+                }
+            });
+        },
     },
 
     Mutation: {
@@ -26,7 +30,7 @@ const Resolver = {
                         }
                     }
                 }
-            })
+            });
         }
     }
     

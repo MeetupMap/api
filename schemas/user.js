@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 const Resolver = {
     Query: {
         user: async (_, {userID}) => {
-            const user = await prisma.user.findUnique({
+            return prisma.user.findUnique({
                 where: { id: userID },
                 include: {
                     groups: {
@@ -13,8 +13,7 @@ const Resolver = {
                         }
                     }
                 }
-            })
-            return user;
+            });
         },
     },
 

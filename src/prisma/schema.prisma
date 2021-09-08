@@ -14,13 +14,6 @@ model User {
   groups        Group[]
 }
 
-model Group {
-  id        String      @id
-  name      String
-  meetups   Meetup[] 
-  users     User[]
-}
-
 model Meetup {
   id            String  @id
   name          String
@@ -28,3 +21,9 @@ model Meetup {
   groups        Group[]
 }
 
+model Group {
+  id        String      @id
+  name      String
+  meetups   Meetup[] 
+  users     User[]
+}
